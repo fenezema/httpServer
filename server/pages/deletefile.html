@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+	<title>Progjar - HTTP Server</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script> 
+</head>
+<body>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  		<div class="container-fluid">
+    		<div class="navbar-header">
+				<a class="navbar-brand" href="/">HTTP-Server Progjar</a>
+		    </div>
+    
+  		</div>
+	</nav>
+	<h3>Delete Any Files</h3>
+	<p>Root Folder at 'resources'</p>
+	<label>Folder</label>
+	<input id="namadir" type="text" value="">
+	<label>File Name</label>
+	<input id="namafile" type="text" value="">
+	<a id="link" href="">Delete</a>
+	<p id="review">Review</p>
+	<p id="review1">Review1</p>
+	<script>
+		$(document).ready(()=>{
+			$('#namadir').keyup(()=>{
+				var value=$('#namadir').val();
+				$('#review').text("/deletefile:"+value);
+			});
+			$('#namafile').keyup(()=>{
+				var value=$('#namafile').val();
+				$('#review1').text(value);
+			});
+			$('#link').hover(()=>{
+				var link=$('#review').text();
+				var files=$('#review1').text();
+				$('#link').attr("href",link+'&'+files);
+			});
+		});
+	</script>
+</body>
+</html>

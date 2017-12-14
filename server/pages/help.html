@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+	<title>Progjar - HTTP Server</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script> 
+</head>
+<body>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  		<div class="container-fluid">
+    		<div class="navbar-header">
+				<a class="navbar-brand" href="/">HTTP-Server Progjar</a>
+		    </div>
+    
+  		</div>
+	</nav>
+	<div class="container-fluid">
+		<h3>How to :</h3>
+		<ol>
+			<li>
+				<h3>Files List</h3>
+				<p>
+					Menampilkan isi directory root('resources')
+				</p>
+			</li>
+			<li>
+				<h3>Upload File</h3>
+				<p>
+					--
+				</p>
+			</li>
+			<li>
+				<h3>Download File</h3>
+				<p>
+					Download file dapat dilakukan dengan mengisi input textbox dengan menuliskan nama file beserta ekstensi.<br>
+					Contoh :
+					<ul>
+						<li>'test' (jika file 'test' berada dalam root directory('resources'))</li>
+						<li>'dir_namaDirectory/test' (jika file 'test' berada dalam directory 'dir_namaDirectory')</li>
+					</ul>
+				</p>
+			</li>
+			<li>
+				<h3>Delete File</h3>
+				<p>
+					Delete file yang berada pada directory tertentu dengan mengisi path dan nama file beserta ekstensi.<br>
+					Jika file yang ingin di delete berada di root directory('resources') isian pertama harus diisi 'resources'.<br>
+					Jika ada directory lain, isian pertawa awali dengan 'resources/{nama directory}/{dan seterusnya}'.<br>
+					Contoh :
+					<ul>
+						<li>Folder 'resources' File Name 'test' (jika file 'test' berada dalam root directory('resources'))</li>
+						<li>Folder 'resources/{nama directory}' File Name 'test' (jika file 'test' berada dalam directory 'dir_namaDirectory')</li>
+					</ul>
+				</p>
+			</li>
+			<li>
+				<h3>Make Folder</h3>
+				<p>
+					Membuat directory.<br>
+					Jika directory yang ingin di buat berada di root directory('resources') isian pertama harus diisi 'resources'.<br>
+					Jika ada directory lain, isian pertawa awali dengan 'resources/{nama directory}/{dan seterusnya}'.<br>
+					Isian kedua diisi dengan nama directory yang ingin dibuat. Secara default, nama directory akan ditambahkan 'dir_'<br>
+					Contoh :
+					<ul>
+						<li>Folder Path 'resources' Nama Folder 'Faiq'(akan membuat directory bernama 'dir_Faiq' pada root directory ('resources'))</li>
+						<li>Folder Path 'resources/dir_Test' Nama Folder 'Faiq'(akan membuat directory bernama 'dir_Faiq' pada directory 'dir_Test'(parent directory ('dir_Test') harus sudah ada jika ingin membuat folder dalam folder))</li>
+					</ul>
+				</p>
+			</li>
+			<li>
+				<h3>Delete Folder</h3>
+				<p>
+					Hapus directory.<br>
+					Delete directry yang berada pada directory tertentu dengan mengisi path dan nama folder.<br>
+					Jika folder yang ingin di delete berada di root directory('resources') isian pertama harus diisi 'resources'.<br>
+					Jika ada directory lain, isian pertawa awali dengan 'resources/{nama directory}/{dan seterusnya}'.<br>
+					Contoh :
+					<ul>
+						<li>Folder 'resources' Folder Name 'dir_Test' (jika folder 'dir_Test' berada dalam root directory('resources'))</li>
+						<li>Folder 'resources/{nama directory}' Folder Name 'dir_Test' (jika folder 'dir_Test' berada dalam directory 'dir_namaDirectory')</li>
+					</ul>
+				</p>
+			</li>
+			<li>
+				<h3>Move File/Folder</h3>
+				<p>
+					Memindahkan file atau directory.<br>
+					Memindahkan file atau folder ke tempat lain dengan mengisi path file/directory yang ingin dipindah dan path tujuan.<br>
+					Isian pertama diawali dengan nama file/directory yang ingin dipindah. Jika file/directory berada dalam sub-directory, maka 'dir_Test/{nama file/directory}'<br>
+					Isian kedua path tujuan, diawali dengan 'resources' lalu sesuaikan dengan kebutuhan.<br>
+					Contoh :
+					<ul>
+						<li>Nama File/Folder 'test' Path Tujuan 'resources/dir_Test1'(memindahkan file 'test' ke directory 'dir_Test1')</li>
+						<li>Nama File/Folder 'dir_Test' Path Tujuan 'resources/dir_Test1/dir_Test2'(memindahkan directory 'dir_Test' ke directory 'dir_Test1/dir_Test2')</li>
+					</ul>
+				</p>
+			</li>
+			
+		</ol>
+	</div>
+</body>
+</html>
