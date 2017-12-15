@@ -100,7 +100,6 @@ def response_php():
 	return hasil
 	
 def response_upfile():
-	sub.Popen(['php','pages/upload.php'],shell=True,stdout=sub.PIPE)
 	page = open('pages/uploadfile.html','r').read()
 	panjang = len(page)
 	hasil = "HTTP/1.1 200 OK\r\n" \
@@ -196,7 +195,15 @@ def layani_client(koneksi_client,alamat_client):
 			else:
 				respon = response_page(url)
 		elif method=="POST":
-			if url=="/upload.php":
+			if url=="/uploadfile":
+				length=len(baris)
+				name_file=baris[length-6]
+				name_file=name_file.split(';')
+				name_file=name_file[2]
+				a,name_file=name_file.split('=')
+				name_file=name_file.replace('"','')
+				with open('resources/'+name_file,'w+') as the_file:
+					the_file.write(baris[length-3])
 				respon = response_upfile()
 
 		koneksi_client.send(respon)

@@ -87,7 +87,6 @@ def response_php():
 	return hasil
 	
 def response_upfile():
-	sub.Popen(['php','pages/upload.php'],shell=True,stdout=sub.PIPE)
 	page = open('pages/uploadfile.html','r').read()
 	panjang = len(page)
 	hasil = "HTTP/1.1 200 OK\r\n" \
@@ -156,7 +155,7 @@ class ClientHandler(asyncore.dispatcher):
 		data = self.recv(64)
 		data = bytes.decode(data)
 		self.request_message = self.request_message+data
-		if (self.request_message[-4:]=="\r\n\r\n"):
+		if self.request_message[-4:]=="\r\n\r\n" or self.request_message[-4:]=="--\r\n":
 			baris = self.request_message.split("\r\n")
 			baris_request = baris[0]
 			print baris_request
@@ -181,7 +180,15 @@ class ClientHandler(asyncore.dispatcher):
 			self.send(respon)
 			self.close()
 		elif method=="POST":
-			if url=="/upload.php":
+			if url=="/uploadfile":
+				length=len(baris)
+				name_file=baris[length-6]
+				name_file=name_file.split(';')
+				name_file=name_file[2]
+				a,name_file=name_file.split('=')
+				name_file=name_file.replace('"','')
+				with open('resources/'+name_file,'w+') as the_file:
+					the_file.write(baris[length-3])
 				respon = response_upfile()
 			self.request_message = ""
 			self.send(respon)
