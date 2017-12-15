@@ -18,7 +18,7 @@ sock.listen(1)
 
 
 def response_files():
-	filepath="/home/fenezema/Documents/IsengProject/Progjar/httpServer/server/resources"
+	filepath="resources"
 	hasil = "HTTP/1.1 200 OK\r\n" \
 		"Content-Type: text/plain\r\n" \
 		"Content-Length: 255\r\n" \

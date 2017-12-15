@@ -5,7 +5,7 @@ import threading
 import os
 
 def response_files():
-	filepath="/home/fenezema/Documents/IsengProject/Progjar/httpServer/server/resources"
+	filepath="resources"
 	hasil = "HTTP/1.1 200 OK\r\n" \
 		"Content-Type: text/plain\r\n" \
 		"Content-Length: 255\r\n" \
@@ -176,9 +176,6 @@ class ClientHandler(asyncore.dispatcher):
 				respon=response_movedir(url)
 			else:
 				respon = response_page(url)
-			self.request_message = ""
-			self.send(respon)
-			self.close()
 		elif method=="POST":
 			if url=="/uploadfile":
 				length=len(baris)
@@ -190,9 +187,9 @@ class ClientHandler(asyncore.dispatcher):
 				with open('resources/'+name_file,'w+') as the_file:
 					the_file.write(baris[length-3])
 				respon = response_upfile()
-			self.request_message = ""
-			self.send(respon)
-			self.close()
+		self.request_message = ""
+		self.send(respon)
+		self.close()
 
 
 
