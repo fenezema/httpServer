@@ -8,8 +8,8 @@ import subprocess as sub
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 #proses binding
-address="localhost"
-server_address = (address, 10000)
+address="10.151.254.67"
+server_address = (address, 10001)
 print >>sys.stderr, 'starting up on %s port %s' % server_address
 sock.bind(server_address)
 
@@ -168,13 +168,15 @@ def layani_client(koneksi_client,alamat_client):
 		request_message = ''
 		while True:
 			data = koneksi_client.recv(1024)
-			data = bytes.decode(data)
+			print "sebelum decode"
+			print data
 			request_message = request_message+data
 			if request_message[-4:]=="\r\n\r\n" or request_message[-4:]=="--\r\n":
 				break
-
 		baris = request_message.split("\r\n")
 		baris_request = baris[0]
+		for i in range(0,len(baris)):
+			print str(i)+' '+baris[i]
 		print baris_request
  
 		method,url,c = baris_request.split(" ")
@@ -197,10 +199,21 @@ def layani_client(koneksi_client,alamat_client):
 		elif method=="POST":
 			if url=="/uploadfile":
 				length=len(baris)
-				name_file=baris[length-6]
+				for i in range(0,len(baris)):
+					if 'filename=' in baris[i]:
+						index_nama=i
+					else:
+						continue
+				name_file=baris[index_nama]
 				name_file=name_file.split(';')
-				name_file=name_file[2]
-				a,name_file=name_file.split('=')
+				for i in range(0,len(name_file)):
+					if 'filename=' in name_file[i]:
+						indexnya=i
+					else:
+						continue
+				name_file=name_file[indexnya]
+				name_file=name_file.split('=')
+				name_file=name_file[1]
 				name_file=name_file.replace('"','')
 				with open('resources/'+name_file,'w+') as the_file:
 					the_file.write(baris[length-3])

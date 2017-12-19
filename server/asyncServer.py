@@ -153,7 +153,6 @@ class ClientHandler(asyncore.dispatcher):
      #fungsi melayani client
 	def handle_read(self):
 		data = self.recv(64)
-		data = bytes.decode(data)
 		self.request_message = self.request_message+data
 		if self.request_message[-4:]=="\r\n\r\n" or self.request_message[-4:]=="--\r\n":
 			baris = self.request_message.split("\r\n")
@@ -179,10 +178,21 @@ class ClientHandler(asyncore.dispatcher):
 		elif method=="POST":
 			if url=="/uploadfile":
 				length=len(baris)
-				name_file=baris[length-6]
+				for i in range(0,len(baris)):
+					if 'filename=' in baris[i]:
+						index_nama=i
+					else:
+						continue
+				name_file=baris[index_nama]
 				name_file=name_file.split(';')
-				name_file=name_file[2]
-				a,name_file=name_file.split('=')
+				for i in range(0,len(name_file)):
+					if 'filename=' in name_file[i]:
+						indexnya=i
+					else:
+						continue
+				name_file=name_file[indexnya]
+				name_file=name_file.split('=')
+				name_file=name_file[1]
 				name_file=name_file.replace('"','')
 				with open('resources/'+name_file,'w+') as the_file:
 					the_file.write(baris[length-3])
